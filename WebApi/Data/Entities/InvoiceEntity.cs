@@ -12,8 +12,13 @@ public class InvoiceEntity
 
     //public bool IsPaid { get; set; }
 
+    //[Column(TypeName = "date")]
     //public DateTime BookingDate { get; set; }
+
+    [Column(TypeName = "date")]
     public DateTime PaymentDate { get; set; }
+
+    [Column(TypeName = "money")]
     public decimal TotalPrice { get; set; }
 
     //Invoice Details should be the same as the Booking Details (exists in another API)
