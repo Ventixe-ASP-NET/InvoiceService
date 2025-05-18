@@ -65,18 +65,19 @@ public class InvoiceService(InvoiceRepository invoiceRepository)
         };
     }
 
-    public async Task<bool> UpdateInvoiceAsync(string id, UpdateInvoiceFormData invoiceFormData)
+    public async Task<bool> UpdateInvoiceAsync(UpdateInvoiceFormData invoiceFormData)
     {
         if (invoiceFormData == null)
             return false;
-        var entity = await _invoiceRepository.GetAsync(e => e.Id == id);
-        if (entity == null)
-            return false;
-        entity.BookingId = invoiceFormData.BookingId;
-        entity.InvoiceTitel = invoiceFormData.InvoiceTitel;
-        entity.PaymentDate = DateTime.Now;
-        entity.TotalPrice = invoiceFormData.TotalPrice;
-        entity.StatusId = 1;
+        var entity = new InvoiceEntity
+        {
+            Id = invoiceFormData.Id,
+            BookingId = invoiceFormData.BookingId,
+            InvoiceTitel = invoiceFormData.InvoiceTitel,
+            PaymentDate = DateTime.Now,
+            TotalPrice = invoiceFormData.TotalPrice,
+            StatusId = 1, // Default status ID for paid invoices
+        };
         var result = await _invoiceRepository.UpdateAsync(entity);
         return result;
     }

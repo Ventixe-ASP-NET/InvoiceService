@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebApi.Data.Contexts;
 using WebApi.Data.Repositories;
+using WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -8,6 +9,9 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddScoped<InvoiceRepository>();
 builder.Services.AddScoped<StatusRepository>();
+
+builder.Services.AddScoped<InvoiceService>();
+builder.Services.AddScoped<StatusService>();
 
 builder.Services.AddDbContext<DataContext>(x =>
     x.UseSqlServer(
