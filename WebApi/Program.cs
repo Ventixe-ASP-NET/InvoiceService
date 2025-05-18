@@ -6,14 +6,16 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 builder.Services.AddDbContext<DataContext>(x =>
-    x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-//ConnectionString is not yet defined.
+    x.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        sqlOptions => sqlOptions.EnableRetryOnFailure()
+    ));
 
 var app = builder.Build();
 app.MapOpenApi();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
-app.UseCors("AllowAll"); // Should be added roles to this?
+app.UseCors("AllowAll");
 
 app.Run();
