@@ -1,5 +1,4 @@
-﻿
-using InvoiceService.Data.Contexts;
+﻿using InvoiceService.Data.Contexts;
 using InvoiceService.Data.Entities;
 
 namespace InvoiceService.Data.Repositories;

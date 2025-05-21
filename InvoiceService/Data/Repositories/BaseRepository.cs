@@ -1,7 +1,8 @@
-﻿using System.Diagnostics;
-using System.Linq.Expressions;
-using InvoiceService.Data.Contexts;
+﻿using InvoiceService.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
+using System.Linq.Expressions;
+
 
 namespace InvoiceService.Data.Repositories;
 

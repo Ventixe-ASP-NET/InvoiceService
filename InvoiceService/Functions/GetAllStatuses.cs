@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using InvoiceService.Services;
-using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
+using System.Net;
 
 namespace InvoiceService.Functions;
 
-public class StatusFunction
+public class GetAllStatuses
 {
-    private readonly ILogger<StatusFunction> _logger;
+    private readonly ILogger<GetAllStatuses> _logger;
     private readonly StatusAppService _statusAppService;
 
-    public StatusFunction(ILogger<StatusFunction> logger, StatusAppService statusAppService)
+    public GetAllStatuses(ILogger<GetAllStatuses> logger, StatusAppService statusAppService)
     {
         _logger = logger;
         _statusAppService = statusAppService;

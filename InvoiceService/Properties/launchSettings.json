@@ -2,7 +2,7 @@
   "profiles": {
     "InvoiceService": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7043",
+      "commandLineArgs": "--port 7163",
       "launchBrowser": false
     }
   }

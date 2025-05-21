@@ -1,4 +1,5 @@
-﻿using InvoiceService.Data.Entities;
+﻿
+using InvoiceService.Data.Entities;
 using InvoiceService.Data.Repositories;
 using InvoiceService.Models;
 

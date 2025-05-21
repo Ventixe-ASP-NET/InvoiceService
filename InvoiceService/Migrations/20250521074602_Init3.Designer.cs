@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InvoiceService.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250520174932_Init2")]
-    partial class Init2
+    [Migration("20250521074602_Init3")]
+    partial class Init3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
