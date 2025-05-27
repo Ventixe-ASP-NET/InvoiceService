@@ -36,12 +36,11 @@ public class InvoiceAppService(InvoiceRepository invoiceRepository)
             InvoiceTitel = i.InvoiceTitel,
             PaymentDate = i.PaymentDate,
             TotalPrice = i.TotalPrice,
-            Status = new Status
+            Status = i.Status != null ? new Status
             {
                 Id = i.Status.Id,
                 IsPaid = i.Status.IsPaid,
-            }
-
+            } : null
         });
         return orderByDescending
                     ? invoices.OrderByDescending(e => e.InvoiceTitel)
