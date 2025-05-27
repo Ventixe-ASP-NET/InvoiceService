@@ -21,11 +21,22 @@ public class CreateInvoice
 
     [Function("CreateInvoice")]
     public async Task<HttpResponseData> Create(
-        [HttpTrigger(AuthorizationLevel.Function, "post", Route = "invoices")] HttpRequestData req)
+    [HttpTrigger(AuthorizationLevel.Function, "post", Route = "invoices")] HttpRequestData req)
     {
+        if (req.Body == null || req.Body.Length == 0)
+        {
+            var badRequestResponse = req.CreateResponse(HttpStatusCode.BadRequest);
+            await badRequestResponse.WriteStringAsync("Request body is empty.");
+            return badRequestResponse;
+        }
+
         var formData = await req.ReadFromJsonAsync<AddInvoiceFormData>();
         if (formData == null)
-            return req.CreateResponse(HttpStatusCode.BadRequest);
+        {
+            var badRequestResponse = req.CreateResponse(HttpStatusCode.BadRequest);
+            await badRequestResponse.WriteStringAsync("Invalid JSON body.");
+            return badRequestResponse;
+        }
 
         var result = await _invoiceAppService.AddInvoiceAsync(formData);
         var response = req.CreateResponse(result ? HttpStatusCode.OK : HttpStatusCode.BadRequest);
