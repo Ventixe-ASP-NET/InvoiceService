@@ -21,11 +21,19 @@ public class UpdateInvoice
 
     [Function("UpdateInvoice")]
     public async Task<HttpResponseData> Update(
-        [HttpTrigger(AuthorizationLevel.Function, "put", Route = "invoices")] HttpRequestData req)
+        [HttpTrigger(AuthorizationLevel.Function, "put", Route = "invoices/{id}")] HttpRequestData req,
+        string id)
     {
         var formData = await req.ReadFromJsonAsync<UpdateInvoiceFormData>();
         if (formData == null)
-            return req.CreateResponse(HttpStatusCode.BadRequest);
+        {
+            var badRequestResponse = req.CreateResponse(HttpStatusCode.BadRequest);
+            await badRequestResponse.WriteStringAsync("Invalid or missing request body.");
+            return badRequestResponse;
+        }
+
+        // Garante que o Id do parâmetro seja usado
+        formData.Id = id;
 
         var result = await _invoiceAppService.UpdateInvoiceAsync(formData);
         var response = req.CreateResponse(result ? HttpStatusCode.OK : HttpStatusCode.NotFound);
